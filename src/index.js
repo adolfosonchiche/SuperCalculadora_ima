@@ -15,11 +15,15 @@ app.set('view engine', 'ejs');
 
 //responder a cada solicitud del cliente
 app.get('/', (request, response) => {
-    response.render('index');
+    response.status(201).sendFile(path.join(__dirname, '../views/index.html'));
 });
 
 app.get('/about', (request, response) => {
     response.status(201).sendFile(path.join(__dirname, '../views/about.html'));
+});
+
+app.get('/help', (request, response) => {
+    response.status(201).sendFile(path.join(__dirname, '../views/help.html'));
 });
 
 app.use((request, response, next) => {
