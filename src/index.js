@@ -15,6 +15,7 @@ app.set('view engine', 'ejs');
 
 //responder a cada solicitud del cliente
 app.get('/', (request, response) => {
+    response.json({history: [ '1+3+4', '34*5']}).status(201);
     response.status(201).sendFile(path.join(__dirname, '../views/index.html'));
 });
 
