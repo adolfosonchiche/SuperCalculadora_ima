@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 function calcular(){
     let val1 = document.getElementById("num1");
     let num1 = val1.value;
@@ -44,4 +46,14 @@ function myFunction() {
 function myFunction2() {
   calcular();
   val2.style.backgroundColor = '#00ff7f';
+}
+
+let Actualizar = () => {
+  axios.get('http://localhost/api/historia')
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((value) => {
+    console.log(value);
+  });
 }
