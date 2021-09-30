@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const puerto = 4000;
+const puerto = 3000;
 
 //recursos a utilizar en la carpeta public
 app.use(express.static('public'));
@@ -30,4 +30,4 @@ app.use((request, response, next) => {
     response.status(404).sendFile(path.join(__dirname, '../views/404.html'));
 });
 
-app.listen(puerto, () => console.log('Escuchando en el puerto 4000'));
+app.listen(puerto, () => console.log('Escuchando en el puerto 3000'));
