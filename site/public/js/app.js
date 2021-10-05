@@ -49,6 +49,7 @@ function myFunction2() {
 }
 
 let Actualizar = () => {
+  console.log('');
   axios.get('http://localhost/api/historia')
   .then((response) => {
     console.log(response);
@@ -56,4 +57,4 @@ let Actualizar = () => {
   .catch((value) => {
     console.log(value);
   });
-}
+};
