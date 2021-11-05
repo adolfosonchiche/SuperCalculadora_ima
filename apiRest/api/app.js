@@ -11,6 +11,12 @@ const puerto = 3001;
 app.use(express.json());
 
 const apiRoutes = require('./routes/api_routes');
+const loginRoutes = require('./routes/loginroutes');
+
+
+
+app.use('/auth/', loginRoutes);
+
 
 app.use('/', apiRoutes);
 

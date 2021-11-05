@@ -8,12 +8,6 @@
     "startdev": "nodemon ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "http",
-    "server",
-    "node",
-    "js"
-  ],
   "author": "adolfosonchiche",
   "license": "ISC",
   "dependencies": {
