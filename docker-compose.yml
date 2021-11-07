@@ -1,5 +1,13 @@
 version: '3'
 services: 
+  redis:
+    image: 'redis:latest'
+  worker:
+    build:
+      dockerfile: Dockerfile
+      context: ./worker
+ #   expose:
+  #    - "5000"
   apirest:
     build:
       dockerfile: Dockerfile
@@ -7,6 +15,14 @@ services:
     volumes: 
       - ./apiRest/api:/app/api
       - ./apiRest/package.json:/app/package.json
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - WORKER_HOST=worker
+      - WORKER_PORT=3002
+      - TOKEN_SECRET=asdfljsdfoi3429023
+    depends_on: 
+      - worker
     #ports: 
     #  - "3001:3001"
   site:
@@ -25,9 +41,11 @@ services:
     depends_on: 
       - site
       - apirest
+      - worker
     restart: always
     build: 
       dockerfile: Dockerfile
       context: ./nginx
     ports: 
       - "8080:80"
+  

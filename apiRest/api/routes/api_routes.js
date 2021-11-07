@@ -21,7 +21,7 @@ routes.get('/prueba', async (req, res) => {
         .catch(error => {
             console.log("error");
             console.log(error);
-            res.send("funciono carmen" + workerhost + "  " +workerport);
+            res.send("funciono " + workerhost + "  " +workerport);
         });
 
     //  console.log("funciono");
@@ -30,35 +30,36 @@ routes.get('/prueba', async (req, res) => {
 
 
 
-routes.get('/historico', authenticated.checkToken,  (request, response) => {
+routes.get('/historico', /*authenticated.checkToken,*/  (request, response) => {
     console.log('historial de los calculos...');
     //response.send('Saludos desde express');
     response.status(201).send({ historial: ['1+1=2', '5*6=25'] });
    //response.json({historial: [ '1+3+4', '34*5']}).status(201);
 });
 
-routes.post('/operacion', authenticated.checkToken, async (request, response) => {
+routes.post('/operacion', /*authenticated.checkToken,*/ async (request, response) => {
 
     const { val1, val2, ope } = request.body;
     const params = {
-        ope1: val1,
-        ope2: val2
+        value1: val1,
+        value2: val2
     };
 
     let val = 'http://' + workerhost + ':' + workerport + '/math/' + ope
+    //let res = 'http://' + workerhost + ':' + workerport + '/math/' + ope
 
     console.log('http://' + workerhost + ':' + workerport + '/math/' + ope);
 
     //response.json({historial: [ '1+3+4', '34*5', `${val}` ]}).status(201);
     await axios.get('http://' + workerhost + ':' + workerport + '/math/' + ope, { port: Number.parseInt(workerport), params })
-        .then(response => {
-            console.log(response.data);
-            response.json({ operacion: `${val1}  ${ope}  ${val2}=${response.data.result}`, resultado: response.data.result }).status(201);
+        .then(res => {
+            console.log(res.data);
+            response.json({ operacion: `${val1}  ${ope}  ${val2} = ${res.data.result}`, resultado: res.data.result }).status(201);
         })
         .catch(error => {
 
             console.log(error);
-            response.send("funciono");
+            response.send("funciono" + res + " " + error);
         });
 });
 

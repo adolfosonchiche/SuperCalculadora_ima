@@ -1,7 +1,7 @@
 const webtoken = require('jsonwebtoken');
 const users = require('../models/Users');
 
-const tokensecret = ""+ process.env.TOKEN_SECRET;
+const tokensecret = process.env.TOKEN_SECRET;//""+ 
 
 module.exports.signToken = (id) => {
     console.log(id)

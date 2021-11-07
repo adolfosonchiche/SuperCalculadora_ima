@@ -13,6 +13,9 @@
     </head>
 
     <body>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
       <div class="nav justify-content-center">
         <header>
           <nav>
@@ -56,17 +59,17 @@
           <div class="containre-sm"> <br><br>
             <label>Selecciona una operacion: </label>
             <select class="form-select" name="operador" id="operador">
-              <option value="suma">Suma</option>
-              <option value="resta">Resta</option>
-              <option value="multiplicacion">Multiplicaci&oacute;n</option>
-              <option value="division">Divisi&oacute;n</option>
+              <option value="suma">suma</option>
+              <option value="resta">resta</option>
+              <option value="producto">producto</option>
+              <option value="division">division</option>
               <option value="potencia">potencia</option>
             </select><br />
           </div>
           <br>
           <div class="containre-sm">
             <button class="btn btn-outline-success" type="button"
-              onclick="calcular();">calcular</button> <br>
+              onclick="abc();">calcular</button> <br>
           </div>
         </form>
       </div>
@@ -97,13 +100,32 @@
               <h2>Historico</h2>
               <div id="historico">
                 <p>Detalle</p>
+                <p id="hist" name="hist"> </p>
               </div>
               <button class="btn btn-outline-secondary" type="button"
-                onclick='Actualizar()'>Actualizar</button>
+                onclick='Actualizar();'>Actualizar</button>
             </div>
           </div>
         </div>
       </div>
+
+
+      <script>
+        await function abc() {
+        
+            var data = {
+                "val1": 5,
+                "val2": 10,
+                "ope": "suma"
+            };
+            
+            var respuesta = fetch('api/operacion', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            }).then(response => response.json()).then(data => console.log(data))
+        }
+    </script>
+
 
     </body>
   </html>
