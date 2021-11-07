@@ -33,7 +33,7 @@ routes.get('/prueba', async (req, res) => {
 routes.get('/historico', /*authenticated.checkToken,*/  (request, response) => {
     console.log('historial de los calculos...');
     //response.send('Saludos desde express');
-    response.status(201).send({ historial: ['1+1=2', '5*6=25'] });
+    response.status(201).send({ historial: [hist] });
    //response.json({historial: [ '1+3+4', '34*5']}).status(201);
 });
 

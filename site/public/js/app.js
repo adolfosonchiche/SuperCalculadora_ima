@@ -31,17 +31,29 @@ async function calcular() {
 			//document.getElementById('operacion').innerHTML = num1 + ' + ' + num2;
 		}*/
 		console.log(operacion);
-		var data = {
-			"val1": 5,
-			"val2": 10,
-			"ope": "suma"
-		};
 		
-		var respuesta = fetch('api/operacion', {
-			method: 'POST',
-			body: JSON.stringify(data)
-		}).then(response => response.json()).then(data => console.log(data))
-   
+
+    await fetch ('http://localhost:8080/api/operacion', {
+            method: 'POST',
+            body: JSON.stringify({
+              "val1": num1,
+              "val2": num2,
+              "ope": operacion
+            }),
+            headers:  {
+                "Content-type": "application/json"
+                 
+            }})
+      .then(response => response.json() )
+      .then(json => {
+        document.getElementById('operacion').innerHTML = json.operacion;
+        document.getElementById('res').innerHTML = json.resultado;
+        })
+
+
+
+
+
     
   }
 	//document.write('<h1>'+ operacion+' </h1>')
