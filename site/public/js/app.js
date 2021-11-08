@@ -27,35 +27,29 @@ async function calcular() {
 	} else {
 		val1.style.backgroundColor = '#00ff7f';
 		val2.style.backgroundColor = '#00ff7f';
-	/*	if (operacion == 'suma') {
+		/*	if (operacion == 'suma') {
 			//document.getElementById('operacion').innerHTML = num1 + ' + ' + num2;
 		}*/
 		console.log(operacion);
-		
 
-    await fetch ('http://localhost:8080/api/operacion', {
-            method: 'POST',
-            body: JSON.stringify({
-              "val1": num1,
-              "val2": num2,
-              "ope": operacion
-            }),
-            headers:  {
-                "Content-type": "application/json"
-                 
-            }})
-      .then(response => response.json() )
-      .then(json => {
-        document.getElementById('operacion').innerHTML = json.operacion;
-        document.getElementById('res').innerHTML = json.resultado;
-        })
-
-
-
-
-
-    
-  }
+		await fetch('http://localhost:8080/api/operacion', {
+			method: 'POST',
+			body: JSON.stringify({
+				val1: num1,
+				val2: num2,
+				ope: operacion
+			}),
+			headers: {
+				authorization:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImN2eCIsImlhdCI6MTYzNjMxNTYxOCwiZXhwIjoxNjM2MzE2MTE4fQ.VxwrGA8eVX3xp0I8-cVaRUjvKjQcDrkaxn5rX6L2mbQ',
+				'Content-type': 'application/json'
+			}
+		})
+			.then((response) => response.json())
+			.then((json) => {
+				document.getElementById('operacion').innerHTML = json.operacion;
+				document.getElementById('res').innerHTML = json.resultado;
+			});
+	}
 	//document.write('<h1>'+ operacion+' </h1>')
 }
 
@@ -81,10 +75,29 @@ let Actualizar = () => {
 };*/
 
 async function Actualizar() {
-	let response = await fetch(`http://localhost:8080/api/historico`);
+
+	await fetch ('http://localhost:8080/api/historico', {
+            method: 'GET',
+            body: JSON.stringify({
+            }),
+            headers:  {
+				"authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImN2eCIsImlhdCI6MTYzNjMxNTYxOCwiZXhwIjoxNjM2MzE2MTE4fQ.VxwrGA8eVX3xp0I8-cVaRUjvKjQcDrkaxn5rX6L2mbQ",
+                "Content-type": "application/json"
+                 
+            }})
+      .then(response => response.json() )
+      .then(json => {
+        document.getElementById('hist').innerHTML = json.historial;
+        })
+
+
+
+
+
+/*	let response = await fetch(`http://localhost:8080/api/historico`);
 
 	let data = await response.json();
 	console.log(data);
 	document.getElementById('hist').innerHTML = data.historial;
-	return data;
+	return data;*/
 }

@@ -30,14 +30,14 @@ routes.get('/prueba', async (req, res) => {
 
 
 
-routes.get('/historico', /*authenticated.checkToken,*/  (request, response) => {
+routes.get('/historico', authenticated.checkToken,  (request, response) => {
     console.log('historial de los calculos...');
     //response.send('Saludos desde express');
-    response.status(201).send({ historial: [hist] });
+    response.status(201).send({ historial: ['1 + 3', '4*4', '45+9'] });
    //response.json({historial: [ '1+3+4', '34*5']}).status(201);
 });
 
-routes.post('/operacion', /*authenticated.checkToken,*/ async (request, response) => {
+routes.post('/operacion', authenticated.checkToken, async (request, response) => {
 
     const { val1, val2, ope } = request.body;
     const params = {
